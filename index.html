@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Body 3 Day Dumbbell Program</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #f8f8f8;
+        --surface: #646464;
+        --surface2: #646464;
+        --border: #2a2a2a;
+        --text: #000000;
+        --muted: #f8f8f8;
+        --dim: #333333;
+        --a: #8a8d6a;
+        --a-dark: #1a1a00;
+        --b: #b08f6d;
+        --b-dark: #001020;
+        --c: #a65f3e;
+        --c-dark: #1a0800;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        min-height: 100vh;
+        padding-bottom: 60px;
+      }
+
+      /* HEADER */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 20px 20px 0;
+      }
+      .header-top {
+        max-width: 640px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+      }
+      .header-label {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: var(--dim);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .header-title {
+        font-family: "DM Serif Display", serif;
+        font-size: 22px;
+        font-weight: normal;
+      }
+
+      #tips-btn {
+        border-radius: 5px;
+        padding: 7px 16px;
+        font-size: 12px;
+        cursor: pointer;
+        letter-spacing: 0.1em;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 600;
+        transition: all 0.2s;
+        white-space: nowrap;
+        border: 1px solid var(--accent, #8a8d6a);
+        background: transparent;
+        color: var(--accent, #8a8d6a);
+      }
+      #tips-btn.active {
+        background: var(--accent, #8a8d6a);
+        color: #111;
+      }
+
+      /* DAY TABS */
+      .tabs {
+        max-width: 640px;
+        margin: 0 auto;
+        display: flex;
+        gap: 8px;
+        padding-bottom: 0;
+      }
+      .tab {
+        flex: 1;
+        padding: 10px 8px;
+        border-radius: 8px 8px 0 0;
+        cursor: pointer;
+        font-size: 13px;
+        font-family: "DM Sans", sans-serif;
+        border: 1px solid var(--border);
+        border-bottom: none;
+        background: var(--surface);
+        color: var(--muted);
+        transition: all 0.2s;
+        text-align: center;
+      }
+      .tab.active {
+        color: #111;
+        border-color: transparent;
+        font-weight: 600;
+      }
+      .tab-sub {
+        font-size: 10px;
+        opacity: 0.7;
+        margin-top: 2px;
+      }
+
+      /* CONTENT */
+      .content {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* TIPS PANEL */
+      #tips-panel {
+        margin-top: 24px;
+        background: var(--border);
+        border: 1px solid var(--muted);
+        border-radius: 10px;
+        overflow: hidden;
+        display: none;
+      }
+      #tips-panel.visible {
+        display: block;
+      }
+      .tips-heading {
+        padding: 12px 18px;
+        border-bottom: 1px solid var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      .tip {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 14px 18px;
+        border-bottom: 1px solid #f8f8f8;
+      }
+      .tip:last-child {
+        border-bottom: none;
+      }
+      .tip-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .tip-title {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .tip-body {
+        font-size: 13px;
+        color: var(--bg);
+        line-height: 1.65;
+      }
+
+      /* WORKOUT HEADER */
+      .workout-header {
+        margin: 28px 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .workout-title {
+        font-family: "DM Serif Display", serif;
+        font-size: 28px;
+        font-weight: normal;
+      }
+      .workout-theme {
+        font-size: 14px;
+        color: var(--dim);
+        margin-top: 3px;
+      }
+      .counter {
+        background: var(#ffffff);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 16px;
+        text-align: center;
+        min-width: 64px;
+      }
+      .counter-num {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .counter-label {
+        font-size: 10px;
+        color: var(--dim);
+        letter-spacing: 0.1em;
+        margin-top: 2px;
+      }
+
+      /* SUPERSETS */
+      .superset {
+        margin-bottom: 10px;
+      }
+
+      .ss-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 18px;
+        cursor: pointer;
+        text-align: left;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        transition: all 0.2s;
+        font-family: "DM Sans", sans-serif;
+      }
+      .ss-header.open {
+        border-radius: 8px 8px 0 0;
+        background: var(--surface2);
+      }
+      .ss-header-left {
+        flex: 1;
+      }
+      .ss-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 3px;
+        letter-spacing: 0.1em;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+      .ss-names {
+        font-size: 14px;
+        color: var(--muted);
+        vertical-align: middle;
+      }
+      .ss-note {
+        font-size: 11px;
+        color: var(--text);
+        margin-top: 5px;
+      }
+      .ss-toggle {
+        font-size: 20px;
+        flex-shrink: 0;
+        transition: transform 0.2s;
+      }
+      .ss-toggle.open {
+        transform: rotate(45deg);
+      }
+
+      /* EXERCISES */
+      .exercises {
+        border-radius: 0 0 8px 8px;
+        overflow: hidden;
+        display: none;
+      }
+      .exercises.open {
+        display: block;
+      }
+
+      .exercise {
+        padding: 16px 18px;
+        background: #efe6dd;
+        border: 1px solid transparent;
+        border-top: 1px solid #222;
+        transition: background 0.2s;
+      }
+      .exercise:last-child {
+        border-radius: 0 0 8px 8px;
+      }
+      .exercise.done {
+        background: #ffffff;
+      }
+
+      .ex-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .ex-name {
+        font-size: 15px;
+        color: var(--text);
+        margin-bottom: 7px;
+        font-weight: 700;
+      }
+      .exercise.done .ex-name {
+        color: #4a9a4a;
+      }
+      .ex-tags {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+      }
+      .ex-reps {
+        font-size: 12px;
+        padding: 2px 10px;
+        border-radius: 3px;
+        font-weight: 600;
+      }
+      .ex-muscle {
+        font-size: 12px;
+        color: var(--dim);
+      }
+      .ex-cue {
+        font-size: 13px;
+        color: #333333;
+        line-height: 1.65;
+        margin-bottom: 6px;
+      }
+      .ex-prog {
+        font-size: 12px;
+        color: var(--dim);
+        font-style: italic;
+      }
+
+      .check-btn {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        border: 1px solid #444;
+        background: transparent;
+        cursor: pointer;
+        font-size: 16px;
+        color: #555;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        font-family: "DM Sans", sans-serif;
+      }
+      .check-btn.done {
+        background: #4a9a4a;
+        border-color: #4a9a4a;
+        color: white;
+      }
+
+      /* FOOTER */
+      .footer {
+        margin-top: 28px;
+        padding: 16px 18px;
+        background: var(--surface);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.75;
+        text-align: center;
+      }
+      .footer span {
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-top">
+        <div>
+          <div class="header-label">3-Day/Week Dumbbell Program</div>
+          <div class="header-title">
+            Full Body Progressive Overload Workouts
+          </div>
+        </div>
+        <button id="tips-btn" onclick="toggleTips()">TIPS</button>
+      </div>
+      <div class="tabs" id="tabs"></div>
+    </div>
+
+    <div class="content">
+      <div id="tips-panel">
+        <div class="tips-heading">Program Guidelines</div>
+        <div id="tips-list"></div>
+      </div>
+
+      <div class="workout-header">
+        <div>
+          <div class="workout-title" id="day-title"></div>
+          <div class="workout-theme" id="day-theme"></div>
+        </div>
+        <div class="counter">
+          <div class="counter-num" id="counter-num">0</div>
+          <div class="counter-label">TRACKED</div>
+        </div>
+      </div>
+
+      <div id="supersets"></div>
+
+      <div class="footer" id="footer"></div>
+    </div>
+
+    <script>
+      const WORKOUTS = [
+        {
+          day: "Day A",
+          theme: "Push + Hinge Focus",
+          color: "#8A8D6A",
+          dark: "#1a1a00",
+          supersets: [
+            {
+              label: "Superset 1",
+              note: "Rest 60s after both exercises",
+              exercises: [
+                {
+                  name: "Goblet Squat",
+                  sets: "4",
+                  reps: "10–12",
+                  muscle: "Quads, Glutes",
+                  cue: "Hold one heavy DB at chest. Drive through heels, chest tall.",
+                  prog: "Add 2.5–5 lbs or 1 rep each week",
+                },
+                {
+                  name: "DB Romanian Deadlift",
+                  sets: "4",
+                  reps: "10–12",
+                  muscle: "Hamstrings, Glutes",
+                  cue: "Hinge at hips, soft knees, feel the hamstring stretch. DBs stay close to legs.",
+                  prog: "Add weight when you can hit 12 clean reps",
+                },
+              ],
+            },
+            {
+              label: "Superset 2",
+              note: "Rest 60s after both exercises",
+              exercises: [
+                {
+                  name: "DB Bench Press (floor or bench)",
+                  sets: "4",
+                  reps: "8–10",
+                  muscle: "Chest, Triceps, Front Delt",
+                  cue: "Elbows at 45°, full range, pause at bottom.",
+                  prog: "Increase weight every 1–2 weeks",
+                },
+                {
+                  name: "DB Bent-Over Row",
+                  sets: "4",
+                  reps: "8–10",
+                  muscle: "Back, Biceps, Rear Delt",
+                  cue: "Hinge to 45°, pull elbows back and up, squeeze at top.",
+                  prog: "Add reps then weight",
+                },
+              ],
+            },
+            {
+              label: "Superset 3",
+              note: "Rest 45s after both exercises",
+              exercises: [
+                {
+                  name: "DB Arnold Press",
+                  sets: "3",
+                  reps: "10–12",
+                  muscle: "Full Shoulder, Tricep",
+                  cue: "Rotate palms out as you press up. Control on the way down.",
+                  prog: "Add reps before weight",
+                },
+                {
+                  name: "DB Lateral Raise",
+                  sets: "3",
+                  reps: "12–15",
+                  muscle: "Lateral Delt",
+                  cue: "Slight forward lean, lead with elbows, don't shrug.",
+                  prog: "Very small weight jumps — this one's strict",
+                },
+              ],
+            },
+            {
+              label: "Finisher",
+              note: "Go straight through, rest 60s then repeat",
+              exercises: [
+                {
+                  name: "DB Hammer Curl",
+                  sets: "3",
+                  reps: "12",
+                  muscle: "Biceps, Brachialis",
+                  cue: "Neutral grip, no swinging. Slow on the way down.",
+                  prog: "Add reps then weight",
+                },
+                {
+                  name: "DB Overhead Tricep Extension",
+                  sets: "3",
+                  reps: "12",
+                  muscle: "Triceps Long Head",
+                  cue: "One or two DBs, elbows close to head, full range.",
+                  prog: "Add reps then weight",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          day: "Day B",
+          theme: "Squat + Pull Focus",
+          color: "#B08F6D",
+          dark: "#001020",
+          supersets: [
+            {
+              label: "Superset 1",
+              note: "Rest 60s after both exercises",
+              exercises: [
+                {
+                  name: "DB Bulgarian Split Squat",
+                  sets: "4",
+                  reps: "8–10 each leg",
+                  muscle: "Quads, Glutes, Stability",
+                  cue: "Back foot elevated, front foot out. Drop straight down, don't let knee cave.",
+                  prog: "One of your best growth moves — add weight often",
+                },
+                {
+                  name: "DB Sumo Deadlift",
+                  sets: "4",
+                  reps: "10–12",
+                  muscle: "Inner Thighs, Glutes, Hamstrings",
+                  cue: "Wide stance, toes out, DBs between legs. Drive hips through at top.",
+                  prog: "Heavy — increase weight when form is locked",
+                },
+              ],
+            },
+            {
+              label: "Superset 2",
+              note: "Rest 60s after both exercises",
+              exercises: [
+                {
+                  name: "DB Single-Arm Row",
+                  sets: "4",
+                  reps: "10 each side",
+                  muscle: "Lats, Mid-Back, Bicep",
+                  cue: "Brace on bench or thigh. Row to hip, not armpit. Full stretch at bottom.",
+                  prog: "Go heavier than you think you can",
+                },
+                {
+                  name: "DB Incline Press",
+                  sets: "4",
+                  reps: "8–10",
+                  muscle: "Upper Chest, Front Delt, Tricep",
+                  cue: "Use pillows/folded mat to prop up if no bench. 30–45° angle.",
+                  prog: "Add weight when hitting top of rep range cleanly",
+                },
+              ],
+            },
+            {
+              label: "Superset 3",
+              note: "Rest 45s after both exercises",
+              exercises: [
+                {
+                  name: "DB Hip Thrust (floor)",
+                  sets: "3",
+                  reps: "12–15",
+                  muscle: "Glutes",
+                  cue: "Shoulders on couch/bench, DB on hips. Squeeze glutes hard at top, 1-sec hold.",
+                  prog: "Add weight or pause reps",
+                },
+                {
+                  name: "DB Renegade Row",
+                  sets: "3",
+                  reps: "8 each side",
+                  muscle: "Back, Core, Shoulders",
+                  cue: "Plank position on DBs. Row one side at a time, minimize rotation.",
+                  prog: "Focus on stability before adding weight",
+                },
+              ],
+            },
+            {
+              label: "Finisher",
+              note: "Go straight through, rest 60s then repeat",
+              exercises: [
+                {
+                  name: "DB Reverse Lunge",
+                  sets: "3",
+                  reps: "10 each leg",
+                  muscle: "Quads, Glutes, Balance",
+                  cue: "Step back, drop down — don't lean forward. Great for knee safety.",
+                  prog: "Add reps or light DBs",
+                },
+                {
+                  name: "DB Curl to Press",
+                  sets: "3",
+                  reps: "10",
+                  muscle: "Biceps, Shoulders",
+                  cue: "Curl up, then press overhead in one fluid motion.",
+                  prog: "Add reps before weight",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          day: "Day C",
+          theme: "Glute + Upper Body Volume",
+          color: "#a65f3e",
+          dark: "#1a0800",
+          supersets: [
+            {
+              label: "Superset 1",
+              note: "Rest 60s after both exercises",
+              exercises: [
+                {
+                  name: "DB Stiff-Leg Deadlift",
+                  sets: "4",
+                  reps: "10–12",
+                  muscle: "Hamstrings, Glutes, Low Back",
+                  cue: "Legs mostly straight, hinge deep. Feel the hamstring stretch — this is the point.",
+                  prog: "Increase weight weekly",
+                },
+                {
+                  name: "DB Goblet Reverse Lunge",
+                  sets: "4",
+                  reps: "10 each leg",
+                  muscle: "Quads, Glutes",
+                  cue: "One heavy DB at chest, step back, controlled drop.",
+                  prog: "Heavier DB or add a pause at the bottom",
+                },
+              ],
+            },
+            {
+              label: "Superset 2",
+              note: "Rest 60s after both exercises",
+              exercises: [
+                {
+                  name: "DB Push-Up with Row",
+                  sets: "4",
+                  reps: "8",
+                  muscle: "Chest, Back, Triceps, Core",
+                  cue: "Hands on DBs, do a push-up, then row one side. Alternate sides.",
+                  prog: "Slow the tempo to add difficulty",
+                },
+                {
+                  name: "DB Upright Row",
+                  sets: "4",
+                  reps: "10–12",
+                  muscle: "Traps, Lateral Delt",
+                  cue: "Elbows flare up and out, DBs stay close to body. Stop at collar bone.",
+                  prog: "Add weight when hitting top of rep range",
+                },
+              ],
+            },
+            {
+              label: "Superset 3",
+              note: "Rest 45s after both exercises",
+              exercises: [
+                {
+                  name: "DB Glute Bridge Pullover",
+                  sets: "3",
+                  reps: "12",
+                  muscle: "Glutes, Lats, Core",
+                  cue: "Lie on back, bridge hips up, hold one DB overhead and pull over chest simultaneously.",
+                  prog: "Heavier DB overhead",
+                },
+                {
+                  name: "DB Front Raise",
+                  sets: "3",
+                  reps: "12",
+                  muscle: "Front Delt",
+                  cue: "Slight lean forward, raise to eye level, controlled lower.",
+                  prog: "Very strict — resist going heavier too fast",
+                },
+              ],
+            },
+            {
+              label: "Finisher",
+              note: "Go straight through, rest 60s then repeat",
+              exercises: [
+                {
+                  name: "DB Zottman Curl",
+                  sets: "3",
+                  reps: "10",
+                  muscle: "Full Bicep + Forearm",
+                  cue: "Curl up supinated, rotate to overhand at top, lower slowly pronated. Best of both grips.",
+                  prog: "Slow negatives for more tension",
+                },
+                {
+                  name: "DB Skull Crusher",
+                  sets: "3",
+                  reps: "12",
+                  muscle: "Triceps",
+                  cue: "Lying down, lower DBs toward temples with elbows fixed, press back up.",
+                  prog: "Add weight when form is perfect",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      const TIPS = [
+        {
+          icon: "📈",
+          title: "Progressive Overload",
+          body: "Track your weights every session. If you hit the top of your rep range with clean form, increase the weight by 2.5–5 lbs next session. Your body won't change without progression.",
+        },
+        {
+          icon: "🍽️",
+          title: "Nutrition is Half the Battle",
+          body: "At 202 lbs targeting 175, aim for ~150g protein/day. Eat in a moderate deficit (200–300 cal below maintenance). This protects muscle while burning fat.",
+        },
+        {
+          icon: "⏱️",
+          title: "Timing",
+          body: "Each workout should take 30–35 min. Move with purpose — rest only the prescribed 45–60 seconds between supersets. Use a timer.",
+        },
+        {
+          icon: "🗓️",
+          title: "Schedule",
+          body: "Aim for Mon / Wed / Fri or Tue / Thu / Sat. Always take at least 1 full rest day between sessions for muscle repair and growth.",
+        },
+        {
+          icon: "🔄",
+          title: "Rotate Days",
+          body: "Rotate A → B → C each week. After 4–6 weeks, add a 4th superset or increase rest time to allow heavier loads.",
+        },
+        {
+          icon: "💪",
+          title: "You're Already Muscular",
+          body: "Since you have a lifting base, you'll respond fast to structure and progressive overload. Expect visible changes in 6–8 weeks with consistent effort.",
+        },
+      ];
+
+      let activeDay = 0;
+      let expandedSet = null;
+      let completed = {};
+
+      function hex(c, a = 1) {
+        return c;
+      }
+
+      function render() {
+        const w = WORKOUTS[activeDay];
+        document.documentElement.style.setProperty("--accent", w.color);
+
+        // Tabs
+        const tabsEl = document.getElementById("tabs");
+        tabsEl.innerHTML = WORKOUTS.map(
+          (wd, i) => `
+    <button class="tab${i === activeDay ? " active" : ""}"
+      style="${
+        i === activeDay
+          ? `background:${wd.color};border-color:${wd.color};`
+          : ""
+      }"
+      onclick="switchDay(${i})">
+      ${wd.day}
+      <div class="tab-sub">${wd.theme}</div>
+    </button>
+  `
+        ).join("");
+
+        // Tips button color
+        const btn = document.getElementById("tips-btn");
+        btn.style.borderColor = w.color;
+        btn.style.color = btn.classList.contains("active") ? "#111" : w.color;
+        btn.style.background = btn.classList.contains("active")
+          ? w.color
+          : "transparent";
+
+        // Tips list
+        document.getElementById("tips-list").innerHTML = TIPS.map(
+          (t) => `
+    <div class="tip">
+      <span class="tip-icon">${t.icon}</span>
+      <div>
+        <div class="tip-title" style="color:${w.color}">${t.title}</div>
+        <div class="tip-body">${t.body}</div>
+      </div>
+    </div>
+  `
+        ).join("");
+
+        // Workout header
+        document.getElementById("day-title").textContent = w.day;
+        document.getElementById("day-theme").textContent = w.theme;
+
+        // Counter
+        const doneCount = Object.keys(completed).filter(
+          (k) => k.startsWith(`${activeDay}-`) && completed[k]
+        ).length;
+        document.getElementById("counter-num").textContent = doneCount;
+        document.getElementById("counter-num").style.color = w.color;
+
+        // Supersets
+        document.getElementById("supersets").innerHTML = w.supersets
+          .map((ss, si) => {
+            const isOpen = expandedSet === `${activeDay}-${si}`;
+            const exHtml = ss.exercises
+              .map((ex, ei) => {
+                const key = `${activeDay}-${si}-${ei}`;
+                const done = !!completed[key];
+                return `
+        <div class="exercise${done ? " done" : ""}" id="ex-${key}">
+          <div class="ex-top">
+            <div style="flex:1">
+              <div class="ex-name">${ex.name}</div>
+              <div class="ex-tags">
+                <span class="ex-reps" style="background:${w.color}22;color:${
+                  w.color
+                }">${ex.sets} sets × ${ex.reps}</span>
+                <span class="ex-muscle">${ex.muscle}</span>
+              </div>
+              <div class="ex-cue">💡 ${ex.cue}</div>
+              <div class="ex-prog">📈 ${ex.prog}</div>
+            </div>
+            <button class="check-btn${
+              done ? " done" : ""
+            }" onclick="toggleDone('${key}')">✓</button>
+          </div>
+        </div>`;
+              })
+              .join("");
+
+            return `
+      <div class="superset">
+        <button class="ss-header${isOpen ? " open" : ""}"
+          style="${isOpen ? `border-color:${w.color}44;` : ""}"
+          onclick="toggleSS('${activeDay}-${si}')">
+          <div class="ss-header-left">
+            <div>
+              <span class="ss-badge" style="background:${w.color};color:${
+              WORKOUTS[activeDay].dark
+            }">${ss.label.toUpperCase()}</span>
+              <span class="ss-names">${ss.exercises
+                .map((e) => e.name)
+                .join(" + ")}</span>
+            </div>
+            <div class="ss-note">${ss.note}</div>
+          </div>
+          <span class="ss-toggle${isOpen ? " open" : ""}">+</span>
+        </button>
+        <div class="exercises${
+          isOpen ? " open" : ""
+        }" style="border:1px solid ${w.color}44;border-top:none;">
+          ${exHtml}
+        </div>
+      </div>`;
+          })
+          .join("");
+
+        // Footer
+        document.getElementById(
+          "footer"
+        ).innerHTML = `Rotate <span style="color:${w.color}">A → B → C</span> each week &nbsp;·&nbsp; Rest 48h between sessions<br>Track your weights. Add load when you hit the top rep range with clean form.`;
+      }
+
+      function switchDay(i) {
+        activeDay = i;
+        expandedSet = null;
+        render();
+      }
+
+      function toggleTips() {
+        const panel = document.getElementById("tips-panel");
+        const btn = document.getElementById("tips-btn");
+        const w = WORKOUTS[activeDay];
+        panel.classList.toggle("visible");
+        btn.classList.toggle("active");
+        if (btn.classList.contains("active")) {
+          btn.style.background = w.color;
+          btn.style.color = "#111";
+          btn.textContent = "HIDE TIPS";
+        } else {
+          btn.style.background = "transparent";
+          btn.style.color = w.color;
+          btn.textContent = "TIPS";
+        }
+      }
+
+      function toggleSS(id) {
+        expandedSet = expandedSet === id ? null : id;
+        render();
+      }
+
+      function toggleDone(key) {
+        completed[key] = !completed[key];
+        render();
+      }
+
+      render();
+    </script>
+  </body>
+</html>
